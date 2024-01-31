@@ -55,14 +55,20 @@ class Program
             guess = Console.ReadLine();
 
 
-            //check if valid input
+            
 
 
             //update the board
             gameBoardArray = UpdateBoard(gameBoardArray, guess, mark);
 
-            //check if there is a winner
-            //need to assign theWinner(string) with what they return with here
+            //theWinner = CheckForWin();
+            if (theWinner != "no winner")
+            {
+                winner = true;
+            }
+
+            
+            
 
 
 
@@ -93,7 +99,7 @@ class Program
         {
             gameBoardArray[0, 2] = marker;
         }
-        if (guess == "left middle")
+        else if (guess == "left middle")
         {
             gameBoardArray[1, 0] = marker;
         }
@@ -105,7 +111,7 @@ class Program
         {
             gameBoardArray[1, 2] = marker;
         }
-        if (guess == "bottom left")
+        else if (guess == "bottom left")
         {
             gameBoardArray[2, 0] = marker;
         }
@@ -116,6 +122,12 @@ class Program
         else if (guess == "bottom right")
         {
             gameBoardArray[2, 2] = marker;
+        }
+        else
+        {
+            //need to add somethine here to loop back and check the next input they put in
+            Console.WriteLine("Please enter corect input");
+            Console.WriteLine("Correct Options:");
         }
 
         return gameBoardArray;

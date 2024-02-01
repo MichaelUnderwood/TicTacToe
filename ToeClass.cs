@@ -15,7 +15,6 @@ using TicTacToe;
 • Contain a method that receives the game board array as input and returns if there is a
 winner and who it was \*
     CheckForWinner */
-
 namespace TicTacToe
 {
     internal class ToeClass
@@ -88,6 +87,5 @@ namespace TicTacToe
             return "no winner";
         }
     }
-}
 }
 

@@ -18,28 +18,112 @@ class Program
 {
     static void Main()
     {
-        WelcomeUser();
+        bool winner = false;
+        string guess = "";
+        int counter = 0;
+        string theWinner = "";
 
-    }
+        //create game board
+        char[,] gameBoardArray = new char[3, 3];
 
-    static void WelcomeUser()
-    {
+
+
+        //start of game
         Console.WriteLine("Welcome to Byte Brigade's Tic-Tac-Toe of Destiny.");
+
+
+
+
+
+        do
+        {
+            int playerNum = 2;
+            char mark = 'O';
+
+            if (counter % 2 == 0)
+            {
+                playerNum = 1;
+            }
+            if (playerNum == 1)
+            {
+                mark = 'X';
+            }
+            //call the Print board method from other class
+            //PrintBoard();
+
+            Console.WriteLine($"Player {playerNum}'s Selection:");
+            guess = Console.ReadLine();
+
+
+            //check if valid input
+
+
+            //update the board
+            gameBoardArray = UpdateBoard(gameBoardArray, guess, mark);
+
+            //check if there is a winner
+            //need to assign theWinner(string) with what they return with here
+
+
+
+
+            counter += 1;
+
+        } while (!winner);
+
+
+        Console.WriteLine($"{theWinner} wone the game, come again sometime");
+
+
+
+
     }
 
-    static char[,] GameBoardArray()
+    static char[,] UpdateBoard(char[,] gameBoardArray, string guess, char marker)
     {
-        // 
-        return new char[3, 3];
+        if (guess == "top left")
+        {
+            gameBoardArray[0, 0] = marker;
+        }
+        else if (guess == "top middle")
+        {
+            gameBoardArray[0, 1] = marker;
+        }
+        else if (guess == "top right")
+        {
+            gameBoardArray[0, 2] = marker;
+        }
+        if (guess == "left middle")
+        {
+            gameBoardArray[1, 0] = marker;
+        }
+        else if (guess == "middle")
+        {
+            gameBoardArray[1, 1] = marker;
+        }
+        else if (guess == "right middle")
+        {
+            gameBoardArray[1, 2] = marker;
+        }
+        if (guess == "bottom left")
+        {
+            gameBoardArray[2, 0] = marker;
+        }
+        else if (guess == "bottom middle")
+        {
+            gameBoardArray[2, 1] = marker;
+        }
+        else if (guess == "bottom right")
+        {
+            gameBoardArray[2, 2] = marker;
+        }
+
+        return gameBoardArray;
     }
 
-    static void AskPlayerForChoice(char[,] gameBoardArray)
-    {
-        //stuff
-    }
 
-    static void NotifyWinner()
-    {
-        Console.WriteLine("Congrats!");
-    }
+
+
+
+
 }

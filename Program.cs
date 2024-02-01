@@ -39,6 +39,7 @@ class Program
         {
             int playerNum = 2;
             char mark = 'O';
+            bool validInput = false;
 
             if (counter % 2 == 0)
             {
@@ -51,8 +52,23 @@ class Program
 
             tc.PrintBoard(gameBoardArray);
 
-            Console.WriteLine($"Player {playerNum}'s Selection:");
-            guess = int.Parse(Console.ReadLine());//FIXME error when entering a non number 
+           
+            
+            do
+            {
+                Console.Write($"Player {playerNum}'s Selection: ");
+                string input = Console.ReadLine();
+
+                if (input.All(char.IsDigit))
+                {
+                    guess = int.Parse(input);
+                    validInput = true;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid number.");
+                }
+            } while (!validInput);
 
             //update the board
             gameBoardArray = UpdateBoard(gameBoardArray, guess, mark);
@@ -74,6 +90,7 @@ class Program
     static char[,] UpdateBoard(char[,] gameBoardArray, int guess, char marker)
     {
         bool goodMove = false;
+        bool validInput = false;
         do
         {
             if (guess == 1 && gameBoardArray[0, 0] == '1')
@@ -124,67 +141,28 @@ class Program
             else
             {
                 Console.WriteLine("Invalid move, please only enter a number of a spot that has not already been chosen");
-                guess = int.Parse(Console.ReadLine());
+                Console.WriteLine("Selection:");
+                
+                do
+                {
+                    
+                    string input = Console.ReadLine();
+
+                    if (input.All(char.IsDigit))
+                    {
+                        guess = int.Parse(input);
+                        validInput = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid input. Please enter a valid number.");
+                    }
+                } while (!validInput);
 
             }
         } while (!goodMove);
         return gameBoardArray;
-        /*
-        // to check if the move is invalid or not, can likely be more dynamic....
-        //what is the correct name for [row,col] --- gameBoardArray
-        while (gameBoardArray[,] == 'X' || gameBoardArray[,] == 'O')
-        {
-            Console.WriteLine("Invalid move. That spot is already taken. Please choose another spot:");
-            guess = int.Parse(Console.ReadLine());
-
-            // Update row and col after getting new guess
-            if (guess == 1)
-            {
-                gameBoardArray[0, 0] = marker;
-            }
-            else if (guess == 2)
-            {
-                gameBoardArray[0, 1] = marker;
-            }
-            else if (guess == 3)
-            {
-                gameBoardArray[0, 2] = marker;
-            }
-            else if (guess == 4)
-            {
-                gameBoardArray[1, 0] = marker;
-            }
-            else if (guess == 5)
-            {
-                gameBoardArray[1, 1] = marker;
-            }
-            else if (guess == 6)
-            {
-                gameBoardArray[1, 2] = marker;
-            }
-            else if (guess == 7)
-            {
-                gameBoardArray[2, 0] = marker;
-            }
-            else if (guess == 8)
-            {
-                gameBoardArray[2, 1] = marker;
-            }
-            else if (guess == 9)
-            {
-                gameBoardArray[2, 2] = marker;
-            }
-            else
-            {
-                //need to add somethine here to loop back and check the next input they put in
-                Console.WriteLine("Please enter corect input");
-                Console.WriteLine("Correct Options:");
-            }
-
-            return gameBoardArray;
         
-        }
-        */
     }
 }
 

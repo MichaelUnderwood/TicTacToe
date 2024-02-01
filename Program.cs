@@ -12,7 +12,7 @@
 when a win has occurred and which player won the game
     CheckForWinner (calls a method in the supporting class)
     NotifyWinner*/
-
+using TicTacToe;
 
 class Program
 {
@@ -22,6 +22,7 @@ class Program
         int guess = 0;
         int counter = 0;
         string theWinner = "";
+        ToeClass tc = new ToeClass();
 
         //create game board
         char[,] gameBoardArray =
@@ -48,11 +49,15 @@ class Program
                 mark = 'X';
             }
 
+            tc.PrintBoard(gameBoardArray);
+
             Console.WriteLine($"Player {playerNum}'s Selection:");
-            guess = int.Parse(Console.ReadLine());
+            guess = int.Parse(Console.ReadLine());//FIXME error when entering a non number 
 
             //update the board
             gameBoardArray = UpdateBoard(gameBoardArray, guess, mark);
+
+            theWinner = tc.CheckForWin(gameBoardArray);
 
             if (theWinner != "no winner")
             {
@@ -68,43 +73,63 @@ class Program
 
     static char[,] UpdateBoard(char[,] gameBoardArray, int guess, char marker)
     {
-        if (guess == 1)
+        bool goodMove = false;
+        do
         {
-            gameBoardArray[0, 0] = marker;
-        }
-        else if (guess == 2)
-        {
-            gameBoardArray[0, 1] = marker;
-        }
-        else if (guess == 3)
-        {
-            gameBoardArray[0, 2] = marker;
-        }
-        else if (guess == 4)
-        {
-            gameBoardArray[1, 0] = marker;
-        }
-        else if (guess == 5)
-        {
-            gameBoardArray[1, 1] = marker;
-        }
-        else if (guess == 6)
-        {
-            gameBoardArray[1, 2] = marker;
-        }
-        else if (guess == 7)
-        {
-            gameBoardArray[2, 0] = marker;
-        }
-        else if (guess == 8)
-        {
-            gameBoardArray[2, 1] = marker;
-        }
-        else if (guess == 9)
-        {
-            gameBoardArray[2, 2] = marker;
-        }
+            if (guess == 1 && gameBoardArray[0, 0] == '1')
+            {
+                gameBoardArray[0, 0] = marker;
+                goodMove = true;
+            }
+            else if (guess == 2 && gameBoardArray[0, 1] == '2')
+            {
+                gameBoardArray[0, 1] = marker;
+                goodMove = true;
+            }
+            else if (guess == 3 && gameBoardArray[0, 2] == '3')
+            {
+                gameBoardArray[0, 2] = marker;
+                goodMove = true;
+            }
+            else if (guess == 4 && gameBoardArray[1, 0] == '4')
+            {
+                gameBoardArray[1, 0] = marker;
+                goodMove = true;
+            }
+            else if (guess == 5 && gameBoardArray[1, 1] == '5')
+            {
+                gameBoardArray[1, 1] = marker;
+                goodMove = true;
+            }
+            else if (guess == 6 && gameBoardArray[1, 2] == '6')
+            {
+                gameBoardArray[1, 2] = marker;
+                goodMove = true;
+            }
+            else if (guess == 7 && gameBoardArray[2, 0] == '7')
+            {
+                gameBoardArray[2, 0] = marker;
+                goodMove = true;
+            }
+            else if (guess == 8 && gameBoardArray[2, 1] == '8')
+            {
+                gameBoardArray[2, 1] = marker;
+                goodMove = true;
+            }
+            else if (guess == 9 && gameBoardArray[2, 2] == '9')
+            {
+                gameBoardArray[2, 2] = marker;
+                goodMove = true;
+            }
+            else
+            {
+                Console.WriteLine("Invalid move, please only enter a number of a spot that has not already been chosen");
+                guess = int.Parse(Console.ReadLine());
 
+            }
+        } while (!goodMove);
+        return gameBoardArray;
+        /*
         // to check if the move is invalid or not, can likely be more dynamic....
         //what is the correct name for [row,col] --- gameBoardArray
         while (gameBoardArray[,] == 'X' || gameBoardArray[,] == 'O')
@@ -157,7 +182,9 @@ class Program
             }
 
             return gameBoardArray;
+        
         }
+        */
     }
 }
 

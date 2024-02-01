@@ -19,21 +19,20 @@ class Program
     static void Main()
     {
         bool winner = false;
-        string guess = "";
+        int guess = 0;
         int counter = 0;
         string theWinner = "";
 
         //create game board
-        char[,] gameBoardArray = new char[3, 3];
-
-
+        char[,] gameBoardArray =
+         {
+            {'1', '2', '3'},
+            {'4', '5', '6'},
+            {'7', '8', '9'}
+        };
 
         //start of game
         Console.WriteLine("Welcome to Byte Brigade's Tic-Tac-Toe of Destiny.");
-
-
-
-
 
         do
         {
@@ -48,82 +47,117 @@ class Program
             {
                 mark = 'X';
             }
-            //call the Print board method from other class
-            //PrintBoard();
 
             Console.WriteLine($"Player {playerNum}'s Selection:");
-            guess = Console.ReadLine();
-
-
-            //check if valid input
-
+            guess = int.Parse(Console.ReadLine());
 
             //update the board
             gameBoardArray = UpdateBoard(gameBoardArray, guess, mark);
 
-            //check if there is a winner
-            //need to assign theWinner(string) with what they return with here
-
-
-
+            if (theWinner != "no winner")
+            {
+                winner = true;
+            }
 
             counter += 1;
 
         } while (!winner);
 
-
         Console.WriteLine($"{theWinner} wone the game, come again sometime");
-
-
-
-
     }
 
-    static char[,] UpdateBoard(char[,] gameBoardArray, string guess, char marker)
+    static char[,] UpdateBoard(char[,] gameBoardArray, int guess, char marker)
     {
-        if (guess == "top left")
+        if (guess == 1)
         {
             gameBoardArray[0, 0] = marker;
         }
-        else if (guess == "top middle")
+        else if (guess == 2)
         {
             gameBoardArray[0, 1] = marker;
         }
-        else if (guess == "top right")
+        else if (guess == 3)
         {
             gameBoardArray[0, 2] = marker;
         }
-        if (guess == "left middle")
+        else if (guess == 4)
         {
             gameBoardArray[1, 0] = marker;
         }
-        else if (guess == "middle")
+        else if (guess == 5)
         {
             gameBoardArray[1, 1] = marker;
         }
-        else if (guess == "right middle")
+        else if (guess == 6)
         {
             gameBoardArray[1, 2] = marker;
         }
-        if (guess == "bottom left")
+        else if (guess == 7)
         {
             gameBoardArray[2, 0] = marker;
         }
-        else if (guess == "bottom middle")
+        else if (guess == 8)
         {
             gameBoardArray[2, 1] = marker;
         }
-        else if (guess == "bottom right")
+        else if (guess == 9)
         {
             gameBoardArray[2, 2] = marker;
         }
 
-        return gameBoardArray;
+        // to check if the move is invalid or not, can likely be more dynamic....
+        //what is the correct name for [row,col] --- gameBoardArray
+        while (gameBoardArray[,] == 'X' || gameBoardArray[,] == 'O')
+        {
+            Console.WriteLine("Invalid move. That spot is already taken. Please choose another spot:");
+            guess = int.Parse(Console.ReadLine());
+
+            // Update row and col after getting new guess
+            if (guess == 1)
+            {
+                gameBoardArray[0, 0] = marker;
+            }
+            else if (guess == 2)
+            {
+                gameBoardArray[0, 1] = marker;
+            }
+            else if (guess == 3)
+            {
+                gameBoardArray[0, 2] = marker;
+            }
+            else if (guess == 4)
+            {
+                gameBoardArray[1, 0] = marker;
+            }
+            else if (guess == 5)
+            {
+                gameBoardArray[1, 1] = marker;
+            }
+            else if (guess == 6)
+            {
+                gameBoardArray[1, 2] = marker;
+            }
+            else if (guess == 7)
+            {
+                gameBoardArray[2, 0] = marker;
+            }
+            else if (guess == 8)
+            {
+                gameBoardArray[2, 1] = marker;
+            }
+            else if (guess == 9)
+            {
+                gameBoardArray[2, 2] = marker;
+            }
+            else
+            {
+                //need to add somethine here to loop back and check the next input they put in
+                Console.WriteLine("Please enter corect input");
+                Console.WriteLine("Correct Options:");
+            }
+
+            return gameBoardArray;
+        }
     }
-
-
-
-
-
-
 }
+

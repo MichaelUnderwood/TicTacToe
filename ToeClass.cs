@@ -21,6 +21,9 @@ namespace TicTacToe
     {
         public void PrintBoard(char[,] Board)
         {
+            //Create some space to make the grid look nice
+            Console.WriteLine();
+            
             for (int row = 0; row < 3; row++)
             {
                 for (int col = 0; col < 3; col++)
@@ -39,9 +42,11 @@ namespace TicTacToe
                 // Add horizontal line between rows, except for the last row
                 if (row < 2)
                 {
-                    Console.WriteLine("────────────");
+                    Console.WriteLine("───────────");
                 }
             }
+            //Create some more space
+            Console.WriteLine();
         }
 
 

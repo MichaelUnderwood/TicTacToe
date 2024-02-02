@@ -1,17 +1,3 @@
-/* Michael & Nate
- * 1) Program.cs: 
-• Welcome the user to the game 
-    WelcomeUser
-• Create a game board array to store the players’ choices
-    GameBoardArray
-• Ask each player in turn for their choice and update the game board array
-    AskPlayerForChoice
-• Print the board by calling the method in the supporting class
-    PrintBoard (calls a method in the supporting class)
-• Check for a winner by calling the method in the supporting class, and notify the players
-when a win has occurred and which player won the game
-    CheckForWinner (calls a method in the supporting class)
-    NotifyWinner*/
 using TicTacToe;
 
 class Program
@@ -19,12 +5,12 @@ class Program
     static void Main()
     {
         bool winner = false;
+        bool tie = false;
         int guess = 0;
         int counter = 0;
         string theWinner = "";
         ToeClass tc = new ToeClass();
 
-        //create game board
         char[,] gameBoardArray =
          {
             {'1', '2', '3'},
@@ -32,7 +18,6 @@ class Program
             {'7', '8', '9'}
         };
 
-        //start of game
         Console.WriteLine("Welcome to Byte Brigade's Tic-Tac-Toe of Destiny.");
 
         do
@@ -52,8 +37,6 @@ class Program
 
             tc.PrintBoard(gameBoardArray);
 
-           
-            
             do
             {
                 Console.Write($"Player {playerNum}'s Selection: ");
@@ -70,7 +53,6 @@ class Program
                 }
             } while (!validInput);
 
-            //update the board
             gameBoardArray = UpdateBoard(gameBoardArray, guess, mark);
 
             theWinner = tc.CheckForWin(gameBoardArray);
@@ -79,12 +61,26 @@ class Program
             {
                 winner = true;
             }
+            else if (counter == 8) // Check for a tie 
+            {
+                tie = true;
+                break;
+            }
 
             counter += 1;
 
         } while (!winner);
 
-        Console.WriteLine($"{theWinner} wone the game, come again sometime");
+        tc.PrintBoard(gameBoardArray);
+
+        if (tie)
+        {
+            Console.WriteLine("Tie Game!");
+        }
+        else
+        {
+            Console.WriteLine($"{theWinner} won the game, come again...or don't.");
+        }
     }
 
     static char[,] UpdateBoard(char[,] gameBoardArray, int guess, char marker)
@@ -142,10 +138,9 @@ class Program
             {
                 Console.WriteLine("Invalid move, please only enter a number of a spot that has not already been chosen");
                 Console.WriteLine("Selection:");
-                
+
                 do
                 {
-                    
                     string input = Console.ReadLine();
 
                     if (input.All(char.IsDigit))
@@ -162,7 +157,6 @@ class Program
             }
         } while (!goodMove);
         return gameBoardArray;
-        
+
     }
 }
-

@@ -7,14 +7,10 @@ using System.Threading.Tasks;
 using TicTacToe;
 
 /* Ben & Jefferson
-2) ToeClass.cs will:
+2) This class will:
 • Receive the “board” array from the driver class
-    gameBoardArray[]
-• Contain a method that prints the board based on the information passed to it
-    PrintBoard
-• Contain a method that receives the game board array as input and returns if there is a
-winner and who it was \*
-    CheckForWinner */
+• Contain a method that prints the board based on the information passed to it (PrintBoard)
+• Contain a method that receives the game board array as input and returns if there is a winner and who it was (CheckForWinner) */
 namespace TicTacToe
 {
     internal class ToeClass
@@ -24,8 +20,10 @@ namespace TicTacToe
             //Create some space to make the grid look nice
             Console.WriteLine();
             
+            //outer loop for rows
             for (int row = 0; row < 3; row++)
             {
+                //inner loop to print all 3 columns for the row
                 for (int col = 0; col < 3; col++)
                 {
                     Console.Write($" {Board[row, col]} ");

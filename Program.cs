@@ -1,9 +1,11 @@
 using TicTacToe;
-
+// program written by benny boy macmichael, jefferson lambert, michael underwood, nate shaw
+// this program gives a user an interface for playing tic tac toe in the console. probably the funnest version yet released.
 class Program
 {
     static void Main()
     {
+        // set up our variables that will be used throughtout the program
         bool winner = false;
         bool tie = false;
         int guess = 0;
@@ -11,6 +13,7 @@ class Program
         string theWinner = "";
         ToeClass tc = new ToeClass();
 
+        //create the ggame board matrix
         char[,] gameBoardArray =
          {
             {'1', '2', '3'},
@@ -19,7 +22,7 @@ class Program
         };
 
         Console.WriteLine("Welcome to Byte Brigade's Tic-Tac-Toe of Destiny.");
-
+        // after welcoming the user, a do, while loop. this will take the player number, the mark, anda  boolean and check whose turn it is when marking
         do
         {
             int playerNum = 2;
@@ -36,7 +39,7 @@ class Program
             }
 
             tc.PrintBoard(gameBoardArray);
-
+            // after printing the board inform them whose turn it is
             do
             {
                 Console.Write($"Player {playerNum}'s Selection: ");
@@ -44,6 +47,7 @@ class Program
 
                 if (input.All(char.IsDigit))
                 {
+                    //parse the input because we need to
                     guess = int.Parse(input);
                     validInput = true;
                 }
@@ -52,11 +56,11 @@ class Program
                     Console.WriteLine("Invalid input. Please enter a valid number.");
                 }
             } while (!validInput);
-
+            // update board called from the toeclass
             gameBoardArray = UpdateBoard(gameBoardArray, guess, mark);
 
             theWinner = tc.CheckForWin(gameBoardArray);
-
+            // check for a winner 
             if (theWinner != "no winner")
             {
                 winner = true;
@@ -66,13 +70,13 @@ class Program
                 tie = true;
                 break;
             }
-
+            //incremement the counter just like scrum would
             counter += 1;
 
         } while (!winner);
 
         tc.PrintBoard(gameBoardArray);
-
+        //logic for games and their results
         if (tie)
         {
             Console.WriteLine("Tie Game!");
@@ -83,10 +87,12 @@ class Program
         }
     }
 
+    //method to update the board pulling in several things
     static char[,] UpdateBoard(char[,] gameBoardArray, int guess, char marker)
     {
         bool goodMove = false;
         bool validInput = false;
+        // giant if else statement gbecause we really like them. very useful for putting the nubmers and the markers on and checking for winners.
         do
         {
             if (guess == 1 && gameBoardArray[0, 0] == '1')
@@ -109,6 +115,7 @@ class Program
                 gameBoardArray[1, 0] = marker;
                 goodMove = true;
             }
+            // insert comment here
             else if (guess == 5 && gameBoardArray[1, 1] == '5')
             {
                 gameBoardArray[1, 1] = marker;
@@ -136,6 +143,7 @@ class Program
             }
             else
             {
+                //  input validation and alerting the user
                 Console.WriteLine("Invalid move, please only enter a number of a spot that has not already been chosen");
                 Console.WriteLine("Selection:");
 
@@ -143,6 +151,7 @@ class Program
                 {
                     string input = Console.ReadLine();
 
+                    //read in the user's input and do more validation
                     if (input.All(char.IsDigit))
                     {
                         guess = int.Parse(input);
@@ -155,6 +164,8 @@ class Program
                 } while (!validInput);
 
             }
+
+            // the while loop continues
         } while (!goodMove);
         return gameBoardArray;
 

@@ -21,19 +21,29 @@ namespace TicTacToe
     {
         public void PrintBoard(char[,] Board)
         {
-            //This method doesn't return anything but prints out the board using Console.WriteLine
-            //based off what the board is
             for (int row = 0; row < 3; row++)
             {
                 for (int col = 0; col < 3; col++)
                 {
-                    // just console.write so that it stays on the same line. added tab delimiter for spacing
-                    Console.Write(Board[row, col] + "\t");
+                    Console.Write($" {Board[row, col]} ");
+
+                    // Add vertical line between cells, except for the last column
+                    if (col < 2)
+                    {
+                        Console.Write("|");
+                    }
                 }
-                //create new line for next row of matrix woo
+
                 Console.WriteLine();
+
+                // Add horizontal line between rows, except for the last row
+                if (row < 2)
+                {
+                    Console.WriteLine("────────────");
+                }
             }
         }
+
 
         public string CheckForWin(char[,] board)
         {
@@ -44,10 +54,12 @@ namespace TicTacToe
                 {
                     if (board[row, 0] == 'X')
                     {
+                        PrintBoard(board);
                         return "Player 1";
                     }
                     else if (board[row, 0] == 'O')
                     {
+                        PrintBoard(board);
                         return "Player 2";
                     }
                 }
@@ -60,10 +72,12 @@ namespace TicTacToe
                 {
                     if (board[0, col] == 'X')
                     {
+                        PrintBoard(board);
                         return "Player 1";
                     }
                     else if (board[0, col] == 'O')
                     {
+                        PrintBoard(board);
                         return "Player 2";
                     }
                 }
@@ -75,10 +89,12 @@ namespace TicTacToe
             {
                 if (board[1, 1] == 'X')
                 {
+                    PrintBoard(board);
                     return "Player 1";
                 }
                 else if (board[1, 1] == 'O')
                 {
+                    PrintBoard(board);
                     return "Player 2";
                 }
             }

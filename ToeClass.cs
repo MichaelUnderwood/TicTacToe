@@ -6,35 +6,105 @@ using System.Text;
 using System.Threading.Tasks;
 using TicTacToe;
 
+/* Ben & Jefferson
+2) This class will:
+• Receive the “board” array from the driver class
+• Contain a method that prints the board based on the information passed to it (PrintBoard)
+• Contain a method that receives the game board array as input and returns if there is a winner and who it was (CheckForWinner) */
 namespace TicTacToe
 {
     internal class ToeClass
     {
         public void PrintBoard(char[,] Board)
         {
-            //This method doesn't return anything but prints out the board using Console.WriteLine
-            //based off what the board is
+            //Create some space to make the grid look nice
+            Console.WriteLine();
+            
+            //outer loop for rows
+            for (int row = 0; row < 3; row++)
+            {
+                //inner loop to print all 3 columns for the row
+                for (int col = 0; col < 3; col++)
+                {
+                    Console.Write($" {Board[row, col]} ");
+
+                    // Add vertical line between cells, except for the last column
+                    if (col < 2)
+                    {
+                        Console.Write("|");
+                    }
+                }
+
+                Console.WriteLine();
+
+                // Add horizontal line between rows, except for the last row
+                if (row < 2)
+                {
+                    Console.WriteLine("───────────");
+                }
+            }
+            //Create some more space
+            Console.WriteLine();
         }
 
-        public string CheckForWin(char[,] Board)
+
+        public string CheckForWin(char[,] board)
         {
-            //This will return a string that says either "no winner"
-            //Or just "Player 1" if X is the winner
-            //Or just "Player 2" if O is the winner
-            //And the main program will take that string and handle it accordingly
-            return "";
+            // Check rows
+            for (int row = 0; row < 3; row++)
+            {
+                if (board[row, 0] == board[row, 1] && board[row, 1] == board[row, 2])
+                {
+                    if (board[row, 0] == 'X')
+                    {
+                        PrintBoard(board);
+                        return "Player 1";
+                    }
+                    else if (board[row, 0] == 'O')
+                    {
+                        PrintBoard(board);
+                        return "Player 2";
+                    }
+                }
+            }
+
+            // Check columns
+            for (int col = 0; col < 3; col++)
+            {
+                if (board[0, col] == board[1, col] && board[1, col] == board[2, col])
+                {
+                    if (board[0, col] == 'X')
+                    {
+                        PrintBoard(board);
+                        return "Player 1";
+                    }
+                    else if (board[0, col] == 'O')
+                    {
+                        PrintBoard(board);
+                        return "Player 2";
+                    }
+                }
+            }
+
+            // Check diagonals
+            if ((board[0, 0] == board[1, 1] && board[1, 1] == board[2, 2]) ||
+                (board[0, 2] == board[1, 1] && board[1, 1] == board[2, 0]))
+            {
+                if (board[1, 1] == 'X')
+                {
+                    PrintBoard(board);
+                    return "Player 1";
+                }
+                else if (board[1, 1] == 'O')
+                {
+                    PrintBoard(board);
+                    return "Player 2";
+                }
+            }
+
+            // No winner
+            return "no winner";
         }
     }
 }
-
-
-/* Ben & Jefferson
-2) ToeClass.cs will:
-• Receive the “board” array from the driver class
-    gameBoardArray[]
-• Contain a method that prints the board based on the information passed to it
-    PrintBoard
-• Contain a method that receives the game board array as input and returns if there is a
-winner and who it was \*
-    CheckForWinner */
 
